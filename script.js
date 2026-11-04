@@ -2,10 +2,10 @@ const apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=43.5789&longitud
 
 function getWeatherDescription(code) {
     switch(code) {
-        case 0: return "Clear";
+        case 0: return "Sunny";
         case 1:
         case 2:
-        case 3: return "Partly Cloudy";
+        case 3: return "Cloudy";
         case 45:
         case 48: return "Foggy";
         case 51:
@@ -13,14 +13,42 @@ function getWeatherDescription(code) {
         case 55: return "Drizzle";
         case 61:
         case 63:
-        case 65: return "Rain";
+        case 65: return "Rainy";
         case 71:
         case 73:
-        case 75: return "Snow";
+        case 75: return "Snowy";
         case 95:
         case 96:
         case 99: return "Thunderstorm";
         default: return "Weather Condition: " + code;
+    }
+}
+
+function getBackgroundImage(code) {
+    if (code === 0) {
+        // Sunny
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/sunny.jpg')";
+    } else if (code >= 1 && code <= 3) {
+        // Cloudy
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/cloudy.jpg')";
+    } else if (code >= 45 && code <= 48) {
+        // Foggy
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/foggy.jpg')";
+    } else if (code >= 51 && code <= 55) {
+        // Drizzle
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/drizzle.jpg')";
+    } else if (code >= 61 && code <= 65) {
+        // Rainy
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/Rainy.jpg')";
+    } else if (code >= 71 && code <= 75) {
+        // Snowy
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/snowy.jpg')";
+    } else if (code >= 95 && code <= 99) {
+        // Thunderstorm
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/thunderstorm.jpg')";
+    } else {
+        // Default
+        return "url('/Users/doreen/Desktop/CCT360/Lab6/default.jpg')";
     }
 }
 
@@ -32,11 +60,25 @@ fetch(apiUrl)
         let temp = data.hourly.temperature_2m[0];
         let code = data.hourly.weather_code[0];
 
+        console.log("current weather：", code);
+        
+        //text of temperature & weatheer
         document.querySelector("#temperature").textContent = temp + "°C";
         document.querySelector("#weather-condition").textContent = getWeatherDescription(code);
+
+        //backgroung image
+        document.body.style.backgroundImage = getBackgroundImage(code);
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundPosition = "center";
+
+        //change text color
+        if ((code >= 61 && code <= 65) || (code >= 95 && code <= 99)) {
+            document.body.style.color = "white";
+        } else {
+            document.body.style.color = "black"; 
+        }
     })
         .catch((error) => {
         console.error("Can't get weather data:", error);
         document.querySelector("#weather-condition").textContent = "Error";
-        document.querySelector("#weather-condition").textContent = "";
     });
