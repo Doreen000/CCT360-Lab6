@@ -27,7 +27,7 @@ function getWeatherDescription(code) {
 function getBackgroundImage(code) {
     if (code === 0) {
         // Sunny
-        return "url('./sunny.jpg')";
+        return "url('/CCT360-Lab6/sunny.jpg')";
     } else if (code >= 1 && code <= 3) {
         // Cloudy
         return "url('./cloudy.jpg')";
