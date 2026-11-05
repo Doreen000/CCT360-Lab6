@@ -30,25 +30,25 @@ function getBackgroundImage(code) {
         return "url('/CCT360-Lab6/sunny.jpg')";
     } else if (code >= 1 && code <= 3) {
         // Cloudy
-        return "url('./cloudy.jpg')";
+        return "url('/CCT360-Lab6/cloudy.jpg')";
     } else if (code >= 45 && code <= 48) {
         // Foggy
-        return "url('./foggy.jpg')";
+        return "url('/CCT360-Lab6/foggy.jpg')";
     } else if (code >= 51 && code <= 55) {
         // Drizzle
-        return "url('./drizzle.jpg')";
+        return "url('/CCT360-Lab6/drizzle.jpg')";
     } else if (code >= 61 && code <= 65) {
         // Rainy
-        return "url('./Rainy.jpg')";
+        return "url('/CCT360-Lab6/Rainy.jpg')";
     } else if (code >= 71 && code <= 75) {
         // Snowy
-        return "url('./snowy.jpg')";
+        return "url('/CCT360-Lab6/snowy.jpg')";
     } else if (code >= 95 && code <= 99) {
         // Thunderstorm
-        return "url('./thunderstorm.jpg')";
+        return "url('/CCT360-Lab6/thunderstorm.jpg')";
     } else {
         // Default
-        return "url('./default.jpg')";
+        return "url('/CCT360-Lab6/default.jpg')";
     }
 }
 
